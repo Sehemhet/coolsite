@@ -1,0 +1,49 @@
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{{ title }}</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+
+
+{% block menu %}
+{% endblock menu %}
+{% block content %}
+{% endblock content %}
+<div>
+    <ul>
+        {% if page_obj.has_previous %}
+        <li>
+            <a href="?page={{ page_obj.previous_page_number }}">&lt;</a>
+        </li>
+        {% endif %}
+
+        {% for el in paginator.page_range %}
+            {% if page_obj.number == el %}
+            <li>
+                {{ el }}
+            </li>
+            {% elif el >= page_obj.number|add:-2 and el <= page_obj.number|add:2 %}
+            <li>
+                <a href="?page={{ el }}">{{ el }}</a>
+            </li>
+            {% endif %}
+        {% endfor %}
+
+        {% if page_obj.has_next %}
+        <li>
+            <a href="?page={{ page_obj.next_page_number }}">&gt;</a>
+        </li>
+        {% endif %}
+
+    </ul>
+</div>
+</body>
+</html>

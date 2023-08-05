@@ -1,0 +1,18 @@
+{% extends 'women/base.html' %}
+
+{% block content %}
+<h1>{{ title }}</h1>
+
+<form action="{% url 'add_post' %}" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    <div>{{ form.non_field_errors }}</div>
+    {% for el in form %}
+    <p><label for="{{ el.id_for_label }}">{{ el.label }}</label>{{ el }}</p>
+    <div>{{ el.errors }}</div>
+    {% endfor %}
+
+    <button type="submit">Add</button>
+</form>
+
+{% endblock content %}

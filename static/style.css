@@ -1,0 +1,23 @@
+body {
+    width:90%;
+    margin:0 auto;
+}
+
+.post {
+    display:flex;
+    flex-wrap:nowrap;
+    width:100%;
+}
+.person__img_wrap {
+    width:300px;
+    height:300px;
+    border:5px solid green;
+}
+.person__img {
+    width:100%;
+    height:100%;
+    object-fit:contain;
+}
+.border_bottom {
+    border-bottom:2px dashed black;
+}

@@ -1,0 +1,58 @@
+{% extends 'women/base.html' %}
+{% load static %}
+{% block menu %}
+<ul>
+    {% for el in menu %}
+    <li>
+        <a href="{% url el.url_name %}">{{ el.title }}</a>
+    </li>
+    {% endfor %}
+</ul>
+<ul>
+    {% if cat_selected == 0 %}
+        <li>
+            Home
+        </li>
+    {% else %}
+        <li>
+            <a href="{% url 'home' %}">Home</a>
+        </li>
+    {% endif %}
+    {% for el in cats %}
+    {% if el.women__count > 0 %}
+        <li>
+            <a href="{{ el.get_absolute_url }}">{{ el.name }}</a>
+        </li>
+    {% endif %}
+    {% endfor %}
+</ul>
+
+{% endblock menu %}
+{% block content %}
+<h1>{{ title }}</h1>
+<p>{{ title }}</p>
+    {% for el in posts %}
+    {% if el.is_publish %}
+    <div class="post">
+        {% if el.photo %}
+            <div class="person__img_wrap">
+                <img class="person__img" src="{{ el.photo.url }}" alt="">
+            </div>
+        {% endif %}
+        <div class="border_bottom">
+            <h2>
+                {{ el.title }}
+            </h2>
+            <p>
+                {{ el.cat }} {{ el.time_update|date:"d.m.Y" }}
+            </p>
+
+            <p>
+                {{ el.content|linebreaks|truncatewords:50 }}
+            </p>
+            <p><a href="{{ el.get_absolute_url }}">читать пост</a></p>
+        </div>
+    </div>
+    {% endif %}
+    {% endfor %}
+{% endblock content %}
