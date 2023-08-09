@@ -1,13 +1,4 @@
 {% extends 'women/base.html' %}
-{% block menu %}
-<ul>
-    {% for el in menu %}
-    <li>
-        <a href="{% url el.url_name %}">{{ el.title }}</a>
-    </li>
-    {% endfor %}
-</ul>
-{% endblock menu %}
 {% block content %}
     <div class="post">
         {% if post.photo %}

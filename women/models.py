@@ -1,5 +1,9 @@
+import os
+
 from django.db import models
 from django.urls import reverse
+from django.utils.text import slugify
+import pytils.translit
 
 
 class Women(models.Model):
@@ -17,11 +21,22 @@ class Women(models.Model):
                f"Опубликовано: {self.is_publish}\n"
 
     def get_absolute_url(self):
-        return reverse('post', kwargs={'post_slug': self.slug})
+        return reverse('post', kwargs={'slug':  self.slug})
+
+    def save(self, *args, **kwargs):
+        self.slug = pytils.translit.translify(slugify(self.title, allow_unicode=True))
+        super().save(*args, **kwargs)
+
+    # def get_absolute_image(self):
+    #     return os.path.join('/media/logo', self.slug)
+    #
+    # def save(self, *args, **kwargs):
+    #     self.slug = pytils.translit.translify(slugify(self.title, allow_unicode=True))
+    #     super().save(*args, **kwargs)
 
     class Meta:
-        verbose_name = 'Женщины'
-        verbose_name_plural = 'Женщины'
+        verbose_name = 'Авто'
+        verbose_name_plural = 'Автомобили'
         ordering = ['-time_create']
 
 class Category(models.Model):

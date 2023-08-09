@@ -3,6 +3,10 @@ body {
     margin:0 auto;
 }
 
+#header {
+    background:rgba(100,100,100,0.8);
+}
+
 .post {
     display:flex;
     flex-wrap:nowrap;
